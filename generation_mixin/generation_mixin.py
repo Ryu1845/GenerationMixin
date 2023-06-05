@@ -24,9 +24,9 @@ import torch
 import torch.distributed as dist
 from torch import nn
 
-from ..deepspeed import is_deepspeed_zero3_enabled
-from ..modeling_outputs import CausalLMOutputWithPast, Seq2SeqLMOutput
-from ..models.auto import (
+#from ..deepspeed import is_deepspeed_zero3_enabled
+from .modeling_outputs import CausalLMOutputWithPast, Seq2SeqLMOutput
+from .models.auto import (
     MODEL_FOR_CAUSAL_IMAGE_MODELING_MAPPING,
     MODEL_FOR_CAUSAL_LM_MAPPING,
     MODEL_FOR_SEQ_TO_SEQ_CAUSAL_LM_MAPPING,
@@ -77,7 +77,6 @@ if TYPE_CHECKING:
     from .streamers import BaseStreamer
 
 logger = logging.get_logger(__name__)
-
 
 @dataclass
 class GreedySearchDecoderOnlyOutput(ModelOutput):
@@ -1237,10 +1236,15 @@ class GenerationMixin:
         """
 
         if synced_gpus is None:
+            # TODO readd this
+            """
             if is_deepspeed_zero3_enabled() and dist.get_world_size() > 1:
                 synced_gpus = True
             else:
                 synced_gpus = False
+            """
+            synced_gpus = False
+            
 
         # 1. Handle `generation_config` and kwargs that might update it, and validate the `.generate()` call
         self._validate_model_class()
