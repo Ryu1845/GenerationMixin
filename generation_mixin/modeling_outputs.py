@@ -15,7 +15,7 @@
 import warnings
 from collections import OrderedDict
 from dataclasses import dataclass
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Any
 
 import torch
 

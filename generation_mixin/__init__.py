@@ -1,1 +1,1 @@
-from generation_mixin import GenerationMixin
+from .generation_mixin import GenerationMixin

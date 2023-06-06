@@ -25,19 +25,21 @@ import torch.distributed as dist
 from torch import nn
 
 #from ..deepspeed import is_deepspeed_zero3_enabled
-from .modeling_outputs import CausalLMOutputWithPast, Seq2SeqLMOutput
-from .models.auto import (
+from generation_mixin.modeling_outputs import CausalLMOutputWithPast, Seq2SeqLMOutput
+"""
+from generation_mixin.models.auto import (
     MODEL_FOR_CAUSAL_IMAGE_MODELING_MAPPING,
     MODEL_FOR_CAUSAL_LM_MAPPING,
     MODEL_FOR_SEQ_TO_SEQ_CAUSAL_LM_MAPPING,
     MODEL_FOR_SPEECH_SEQ_2_SEQ_MAPPING,
     MODEL_FOR_VISION_2_SEQ_MAPPING,
 )
-from ..utils import ModelOutput, logging
-from .beam_constraints import DisjunctiveConstraint, PhrasalConstraint
-from .beam_search import BeamScorer, BeamSearchScorer, ConstrainedBeamSearchScorer
-from .configuration_utils import GenerationConfig
-from .logits_process import (
+"""
+from generation_mixin.utils import ModelOutput, logging
+from generation_mixin.beam_constraints import DisjunctiveConstraint, PhrasalConstraint
+from generation_mixin.beam_search import BeamScorer, BeamSearchScorer, ConstrainedBeamSearchScorer
+from generation_mixin.configuration_utils import GenerationConfig
+from generation_mixin.logits_process import (
     EncoderNoRepeatNGramLogitsProcessor,
     EncoderRepetitionPenaltyLogitsProcessor,
     EpsilonLogitsWarper,
@@ -63,7 +65,7 @@ from .logits_process import (
     TopPLogitsWarper,
     TypicalLogitsWarper,
 )
-from .stopping_criteria import (
+from generation_mixin.stopping_criteria import (
     MaxLengthCriteria,
     MaxTimeCriteria,
     StoppingCriteria,
@@ -71,10 +73,6 @@ from .stopping_criteria import (
     validate_stopping_criteria,
 )
 
-
-if TYPE_CHECKING:
-    from ..modeling_utils import PreTrainedModel
-    from .streamers import BaseStreamer
 
 logger = logging.get_logger(__name__)
 
